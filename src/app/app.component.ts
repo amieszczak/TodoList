@@ -18,7 +18,7 @@ import { PageHeaderBarComponent } from './components/page-header-bar/page-header
 export class AppComponent implements OnInit {
   private taskStorage = inject(TaskStorageService);
   
-  title = 'junior-frontend-developer-task';
+  title = 'TodoList';
 
   protected tasks: Task[] = [];
   protected isModalOpen = false;
