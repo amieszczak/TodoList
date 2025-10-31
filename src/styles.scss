@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.form-check-input:checked {
+    background-color: #198754!important;
+    border-color: #198754 !important;
+}
+
+.text-success {
+    color: #198754;
+}

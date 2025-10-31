@@ -1,0 +1,59 @@
+<li class="list-group-item d-block" [class.dropdown-active]="isDropdownOpen">
+  <div class="item d-flex justify-content-between" [ngClass]="{ 'completed': isCompleted }">
+    <div class="d-flex flex-column justify-content-between">
+      <div class="d-flex align-items-center gap-2">
+        <label class="cursor-pointer mb-0">
+          <input type="checkbox" 
+                 class="form-check-input me-2" 
+                 [class.checkbox-success]="isCompleted" 
+                 [checked]="isCompleted"
+                 (change)="onToggleComplete()">
+          <b class="text-primary" [class.text-success]="isCompleted">{{ task.name }}</b>
+        </label>
+        <button class="btn-flag" 
+                (click)="onToggleFlag($event)"
+                [class.flagged]="task.flagged"
+                title="{{ task.flagged ? 'Usuń flagę' : 'Oznacz flagą' }}">
+          <app-icon-flag [filled]="!!task.flagged"></app-icon-flag>
+        </button>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <span>{{ task.date }}</span>
+        @if (task.tags && task.tags.length > 0) {
+          <div class="task-tags">
+            @for (tag of task.tags; track $index) {
+              <span class="badge bg-secondary task-tag-badge">{{ tag }}</span>
+            }
+          </div>
+        }
+      </div>
+    </div>
+    <div class="dropdown-container ms-auto me-2">
+      <button class="btn btn-outline-primary btn-dots" 
+              (click)="onToggleDropdown($event)"
+              [class.active]="isDropdownOpen"
+              title="Opcje">
+        <app-icon-menu-dots></app-icon-menu-dots>
+      </button>
+      @if (isDropdownOpen || isDropdownClosing) {
+        <div class="dropdown-menu-custom" 
+             [class.dropdown-closing]="isDropdownClosing">
+          <button class="dropdown-item-custom" (click)="onEditTask()">
+            <app-icon-edit></app-icon-edit>
+            <span>Edytuj</span>
+          </button>
+          <button class="dropdown-item-custom text-danger" (click)="onDeleteTask()">
+            <app-icon-delete></app-icon-delete>
+            <span>Usuń</span>
+          </button>
+        </div>
+      }
+    </div>
+    <span class="badge my-auto" 
+          [ngClass]="{
+            'bg-success': task.status === 'Completed',
+            'bg-info': task.status === 'Planned'
+          }">{{ task.status }}</span>
+  </div>
+</li>
+

@@ -1,59 +1,83 @@
-# JuniorFrontendDeveloperTask
+# Opis zadania
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+Masz przed sobą działającą, lecz celowo nieestetyczną aplikację do zarządzania listą wydarzeń (todos). Twoim zadaniem jest poprawa wyglądu i funkcjonalności aplikacji przy użyciu Angular, Bootstrap 5 i SCSS.
+## Zakres prac
 
-## Development server
+1. Refaktoryzacja UI
+   * popraw wygląd listy zadań,
+   * zadbaj o estetykę, czytelność, spójność stylów oraz responsywność,
+   * usuń niepotrzebne lub błędne style, popraw klasy Bootstrap,
+   * popracuj nad rozwijaniem opisu
+   
+2. Dodaj filtry, które dynamicznie przefiltrują listę wydarzeń. Filtruj według:
+   * nazwy wydarzenia, -
+   * daty, -
+   * statusu. -
+   
+3. Dodaj formularz dodawania nowego zadania (modal)
+   * zadbaj o jego wygląd, 
+   * dodaj walidację formularza (nazwa i data wymagane, data nie może być przeszła), -
+   * po zapisaniu formularza zadanie powinno pojawić się na liście. -
+4. (Opcjonalnie) Jeśli masz czas, to podziel aplikację na mniejsze komponenty 
 
-To start a local development server, run:
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Jak uruchomić
 
 ```bash
-ng build
+npm install
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
 ```bash
-ng test
+npm run start
 ```
 
-## Running end-to-end tests
+Projekt został stworzony za pomocą narzędzi z następującymi wersjami:
 
-For end-to-end (e2e) testing, run:
+> node v22.14.0
 
-```bash
-ng e2e
-```
+> Angular CLI 19.2.0
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Dostarczenie rozwiązania
 
-## Additional Resources
+Spakuj projekt jako .zip lub prześlij link do repozytorium na GitHubie.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Zrobiono
+
+### 1. Refaktoryzacja UI
+   
+   - poprawiono wygląd listy zadań – dodano checkbox, czytelny układ elementów, statusy kolorami,
+   - zadbano o estetykę i czytelność – dodano animacje, efekty hover, spójne kolory,
+   - usunięto niepotrzebne style, poprawiono klasy Bootstrap,
+   - rozwijanie opisu – dodano edytor z możliwością formatowania tekstu (pogrubienie, kursywa, podkreślenie, listy),
+   - zadbano o responsywność – dostosowano interfejs do urządzeń mobilnych, tabletów i desktopów.
+
+### 2. Dodaj filtry
+
+   - filtrowanie według nazwy wydarzenia – pole wyszukiwania z dynamicznym filtrowaniem,
+   - filtrowanie według daty – zakres dat od-do oraz sortowanie rosnąco/malejąco,
+   - filtrowanie według statusu – możliwość wyboru: wszystkie, planned, completed,
+   - dodano przycisk czyszczenia filtrów.
+
+### 3. Dodaj formularz dodawania nowego zadania
+
+   - zadbano o wygląd – responsywny modal z przejrzystym układem,
+   - dodano walidację formularza – nazwa i data wymagane, data nie może być przeszła,
+   - po zapisaniu formularza zadanie pojawia się na liście,
+   - dodano możliwość edycji istniejących zadań,
+   - dodano obsługę tagów.
+
+### 4. Podział aplikacji na mniejsze komponenty
+
+   - stworzono osobne komponenty: lista zadań, pojedynczy element zadania, modal, panel filtrów, pasek wyszukiwania, nagłówek,
+   - stworzono komponenty ikon,
+   - dodano serwis do zarządzania danymi.
+
+### 5. Dodatkowe funkcjonalności
+
+   - zapisywanie zadań w IndexedDB – dane pozostają po odświeżeniu strony,
+   - system tagów – możliwość dodawania i usuwania tagów do zadań,
+   - oznaczanie zadań flagą,
+   - edytowalny tytuł strony,
+   - menu kontekstowe z opcjami edycji i usuwania,
+   - animacje i płynne przejścia.
+

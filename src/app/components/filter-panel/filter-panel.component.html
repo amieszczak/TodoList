@@ -1,0 +1,110 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">Dodatkowe filtry</h5>
+    <button type="button" 
+            class="btn-close-filter" 
+            (click)="onClosePanel()"
+            title="Zamknij filtry">
+      <app-icon-close [size]="20"></app-icon-close>
+    </button>
+  </div>
+    <div class="card-body">
+      <form>
+        <div class="mb-3">
+          <h6 class="form-label mb-3">Data</h6>
+          <div class="mb-3">
+            <label class="form-label small text-muted mb-2">Zadania w przedziale dat</label>
+            <div class="row g-2">
+              <div class="col-6">
+                <label for="filterDateFrom" class="form-label small text-muted">Od</label>
+                <input type="date" 
+                       class="form-control" 
+                       id="filterDateFrom" 
+                       [(ngModel)]="filters.dateFrom" 
+                       (ngModelChange)="onFiltersChange()"
+                       name="filterDateFrom">
+              </div>
+              <div class="col-6">
+                <label for="filterDateTo" class="form-label small text-muted">Do</label>
+                <input type="date" 
+                       class="form-control" 
+                       id="filterDateTo" 
+                       [(ngModel)]="filters.dateTo"
+                       (ngModelChange)="onFiltersChange()" 
+                       name="filterDateTo">
+              </div>
+            </div>
+          </div>
+          <div class="mb-0">
+            <label for="sortByDate" class="form-label small text-muted mb-2">Sortowanie według daty</label>
+            <div class="custom-select-wrapper" 
+                 [class.dropdown-open]="mobileSelectOpen === 'sortByDate'">
+              <button type="button" 
+                      class="custom-select-button" 
+                      [class.active]="mobileSelectOpen === 'sortByDate'"
+                      (click)="toggleMobileSelect('sortByDate', $event)">
+                {{ getMobileSelectLabel('sortByDate') }}
+              </button>
+              @if (mobileSelectOpen === 'sortByDate') {
+                <div class="custom-select-dropdown">
+                  <div class="custom-select-option" 
+                       [class.selected]="sortByDate === ''"
+                       (click)="selectMobileOption('sortByDate', '', $event)">
+                    Brak sortowania
+                  </div>
+                  <div class="custom-select-option" 
+                       [class.selected]="sortByDate === 'asc'"
+                       (click)="selectMobileOption('sortByDate', 'asc', $event)">
+                    Rosnąco (od najwcześniejszego)
+                  </div>
+                  <div class="custom-select-option" 
+                       [class.selected]="sortByDate === 'desc'"
+                       (click)="selectMobileOption('sortByDate', 'desc', $event)">
+                    Malejąco (od najpóźniejszego)
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+        <hr class="filter-divider">
+        <div class="mb-3">
+          <label for="filterStatus" class="form-label">Status</label>
+          <div class="custom-select-wrapper" 
+               [class.dropdown-open]="mobileSelectOpen === 'filterStatus'">
+            <button type="button" 
+                    class="custom-select-button" 
+                    [class.active]="mobileSelectOpen === 'filterStatus'"
+                    (click)="toggleMobileSelect('filterStatus', $event)">
+              {{ getMobileSelectLabel('filterStatus') }}
+            </button>
+            @if (mobileSelectOpen === 'filterStatus') {
+              <div class="custom-select-dropdown">
+                <div class="custom-select-option" 
+                     [class.selected]="filters.status === ''"
+                     (click)="selectMobileOption('filterStatus', '', $event)">
+                  Wszystkie
+                </div>
+                <div class="custom-select-option" 
+                     [class.selected]="filters.status === 'Planned'"
+                     (click)="selectMobileOption('filterStatus', 'Planned', $event)">
+                  Planned
+                </div>
+                <div class="custom-select-option" 
+                     [class.selected]="filters.status === 'Completed'"
+                     (click)="selectMobileOption('filterStatus', 'Completed', $event)">
+                  Completed
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+        <button type="button" 
+                class="btn w-100" 
+                [ngClass]="hasActiveFilters ? 'btn-warning' : 'btn-secondary'"
+                [disabled]="!hasActiveFilters"
+                (click)="onClearFilters()">Wyczyść filtry</button>
+      </form>
+    </div>
+  </div>
+

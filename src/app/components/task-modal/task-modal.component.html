@@ -1,0 +1,122 @@
+@if (isOpen) {
+  <div class="modal-backdrop fade show"></div>
+  <div class="modal fade show d-block" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ isEditMode ? 'Edycja zadania' : 'Dodaj nowe zadanie' }}</h5>
+          <button type="button" class="btn-close" (click)="onClose()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="taskTitle" class="form-label">Tytuł</label>
+              <input type="text" class="form-control" id="taskTitle" [(ngModel)]="newTask.name" name="taskTitle">
+              @if (showValidationErrors && !newTask.name) {
+                <div class="text-danger mt-2">
+                  <small>Należy uzupełnić tytuł</small>
+                </div>
+              }
+            </div>
+            <div class="mb-3">
+              <label for="taskDescription" class="form-label d-flex justify-content-between align-items-center">
+                <span>Opis</span>
+                <div class="toolbar-edit">
+                  <button type="button" 
+                          class="toolbar-btn" 
+                          [class.active]="activeFormats.bold"
+                          (click)="formatText('bold')" 
+                          title="Pogrubienie">
+                    <app-icon-bold></app-icon-bold>
+                  </button>
+                  <button type="button" 
+                          class="toolbar-btn" 
+                          [class.active]="activeFormats.italic"
+                          (click)="formatText('italic')" 
+                          title="Kursywa">
+                    <app-icon-italic></app-icon-italic>
+                  </button>
+                  <button type="button" 
+                          class="toolbar-btn" 
+                          [class.active]="activeFormats.underline"
+                          (click)="formatText('underline')" 
+                          title="Podkreślenie">
+                    <app-icon-underline></app-icon-underline>
+                  </button>
+                  <div class="toolbar-divider"></div>
+                  <button type="button" 
+                          class="toolbar-btn" 
+                          [class.active]="activeFormats.list"
+                          (click)="formatText('list')" 
+                          title="Lista">
+                    <app-icon-list></app-icon-list>
+                  </button>
+                  <div class="toolbar-divider"></div>
+                  <button type="button" class="toolbar-btn" (click)="clearFormatting()" title="Wyczyść formatowanie">
+                    <app-icon-clear-format></app-icon-clear-format>
+                  </button>
+                </div>
+              </label>
+              <div class="form-control editable-content" 
+                   contenteditable="true"
+                   (input)="onDescriptionInput($event)"
+                   (mouseup)="onSelectionChange()"
+                   (keyup)="onSelectionChange()"
+                   #descTextarea></div>
+            </div>
+            <div class="mb-3">
+              <label for="taskTags" class="form-label">Tagi</label>
+              <div class="tags-container mb-2">
+                @for (tag of newTask.tags; track $index) {
+                  <span class="badge bg-primary tag-badge">
+                    {{ tag }}
+                    <button type="button" 
+                            class="btn-remove-tag" 
+                            (click)="removeTag($index)"
+                            title="Usuń tag">
+                      <app-icon-close [size]="12"></app-icon-close>
+                    </button>
+                  </span>
+                }
+              </div>
+              <div class="input-group">
+                <input type="text" 
+                       class="form-control" 
+                       id="taskTags" 
+                       [(ngModel)]="tagInput" 
+                       name="taskTags"
+                       placeholder="Dodaj tag i naciśnij Enter..."
+                       (keydown)="addTag($event)">
+                <button class="btn btn-outline-primary" 
+                        type="button" 
+                        (click)="addTag()"
+                        [disabled]="!tagInput.trim()">
+                  Dodaj
+                </button>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="taskDate" class="form-label">Data</label>
+              <input type="date" class="form-control" id="taskDate" [(ngModel)]="newTask.date" name="taskDate">
+              @if (showValidationErrors && !newTask.date) {
+                <div class="text-danger mt-2">
+                  <small>Należy uzupełnić datę</small>
+                </div>
+              }
+              @if (showValidationErrors && newTask.date && isPastDate()) {
+                <div class="text-danger mt-2">
+                  <small>Nie można wybrać daty z przeszłości.</small>
+                </div>
+              }
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="onClose()">Anuluj</button>
+          <button type="button" class="btn btn-primary" [disabled]="isSaveButtonDisabled" (click)="onSave()">{{ isEditMode ? 'Zapisz' : 'Dodaj zadanie' }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+

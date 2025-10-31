@@ -1,0 +1,13 @@
+@if (!isEditingTitle) {
+  <h1 class="mb-0 title-display" (click)="startEditingTitle()">{{ pageTitle }}</h1>
+} @else {
+  <input type="text" 
+         class="title-input" 
+         [(ngModel)]="tempTitle" 
+         (keydown)="onTitleKeydown($event)"
+         (blur)="onTitleBlur()">
+}
+<button class="btn btn-primary mx-3 text-nowrap btn-add-task" (click)="onAddTask()" title="Dodaj zadanie">
+  <app-icon-close [size]="20"></app-icon-close>
+</button>
+
