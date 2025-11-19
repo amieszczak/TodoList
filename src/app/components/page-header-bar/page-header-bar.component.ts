@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IconCloseComponent } from '../icons/icon-close.component';
+import { IconPlusComponent } from '../icons/icon-plus.component';
 
 @Component({
   selector: 'app-page-header-bar',
-  imports: [FormsModule, IconCloseComponent],
+  imports: [FormsModule, IconPlusComponent],
   templateUrl: './page-header-bar.component.html',
   styleUrl: './page-header-bar.component.scss',
   standalone: true
