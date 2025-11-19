@@ -2,6 +2,8 @@
 
 A modern, feature-rich task management application built with Angular 19.
 
+Check out the latest build [here](https://amieszczak.github.io/TodoList/)
+
 ## Features
 
 - ✅ Create, edit, and delete tasks
